@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { FaHome, FaFileInvoiceDollar, FaScroll } from "react-icons/fa";
 import { LiaFileInvoiceSolid } from "react-icons/lia";
@@ -10,7 +10,6 @@ import { MdAutorenew, MdUpload } from "react-icons/md";
 import { PiFlowArrow } from "react-icons/pi";
 
 export default function Sidebar() {
-  const router = useRouter();
   const pathname = usePathname();
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 

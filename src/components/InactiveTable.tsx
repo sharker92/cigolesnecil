@@ -1,8 +1,11 @@
 "use client"
 export default function InactiveTable() {
   const accounts = [
-    { app: 'Slack', total: 33, current: 2 },
-    // ... mock data
+      { app: 'NUDGE SECURITY', total: 33, current: 2 },
+    { app: 'ASANA', total: 9, current: 1 },
+    { app: 'ATTLASIAN', total: 8, current: 6 },
+    { app: 'GITHUB', total: 4, current: 2 },
+    { app: 'SLACK', total: 70, current: 68 },
   ];
 
   return (
