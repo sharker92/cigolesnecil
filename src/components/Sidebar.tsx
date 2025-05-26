@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaHome, FaFileInvoiceDollar, FaScroll } from "react-icons/fa";
 import { LiaFileInvoiceSolid } from "react-icons/lia";
 import { FaBrain } from "react-icons/fa6";
@@ -14,38 +14,47 @@ export default function Sidebar() {
   const pathname = usePathname();
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
+  useEffect(() => {
+    const parentLink = links.find(link => 
+      link.subLinks?.some(subLink => pathname.startsWith(subLink.path))
+    );
+    if (parentLink) {
+      setOpenSubmenu(parentLink.id);
+    }
+  }, [pathname]);
+
   const links = [
-    { id: "insights", text: "Insights", path: "/", icon: <FaHome /> },
+    { id: "insights", text: "Insights", path: "/insights", icon: <FaHome /> },
     {
       id: "vendors",
       text: "Vendors",
-      path: "/",
+      path: "/vendors",
       icon: <LiaFileInvoiceSolid />,
       subLinks: [
         {
           id: "applications",
           text: "Applications",
-          path: "/",
+          path: "/applications",
           icon: <FaScroll />,
         },
-        { id: "contracts", text: "Contracts", path: "/", icon: <FaScroll /> },
+        { id: "contracts", text: "Contracts", path: "/contracts", icon: <FaScroll /> },
         {
           id: "invoices",
           text: "Invoices",
-          path: "/",
+          path: "/invoices",
           icon: <FaFileInvoiceDollar />,
         },
         {
           id: "priceinteligence",
           text: "Price Inteligence",
-          path: "/",
+          path: "/price-intelligence",
           icon: <FaBrain />,
         },
       ],
     },
-    { id: "employee", text: "Employee", path: "/", icon: <IoMdPeople /> },
-    { id: "renewals", text: "Renewals", path: "/", icon: <MdAutorenew /> },
-    { id: "workflows", text: "Workflows", path: "/", icon: <PiFlowArrow /> },
+    { id: "employees", text: "Employees", path: "/employees", icon: <IoMdPeople /> },
+    { id: "renewals", text: "Renewals", path: "/renewals", icon: <MdAutorenew /> },
+    { id: "workflows", text: "Workflows", path: "/workflows", icon: <PiFlowArrow /> },
   ];
 
   return (
