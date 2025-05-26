@@ -14,7 +14,7 @@ export default function InsightsPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <Sidebar />
-      <main className="p-4 lg:overflow-y-auto lg:h-screen">
+      <main className="p-4 lg:overflow-y-auto lg:h-screen ml-0 lg:ml-64">
         <Header activeTab={activeTab} setActiveTab={setActiveTab} />
 
         <div className="mt-8 space-y-8 max-w-screen-2xl">

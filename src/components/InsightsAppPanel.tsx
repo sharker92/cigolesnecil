@@ -4,10 +4,12 @@ import InactiveTable from "./InactiveTable";
 
 export default function ApplicationsPanel() {
   return (
-    <>
-      <AdoptionChart />
+    <div className="w-full space-y-8"> 
+      <div className="w-full pr-4"> 
+        <AdoptionChart />
+      </div>
       <InactiveTable />
-    </>
+    </div>
   );
 }
 

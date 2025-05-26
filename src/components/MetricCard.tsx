@@ -1,8 +1,20 @@
 "use client";
+import { ReactNode } from "react";
 
-export default function MetricCard({ title, value }: {title:string, value:string}) {
+type MetricCardProps = {
+  title: string;
+  value: string;
+  icon?: ReactNode;
+};
+
+export default function MetricCard({ title, value, icon }: MetricCardProps) {
   return (
-    <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+    <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow relative">
+      {icon && (
+        <div className="absolute top-4 right-4">
+          {icon}
+        </div>
+      )}
       <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
         {title}
       </h3>
