@@ -38,14 +38,17 @@ export default function InactiveTable() {
 
   return (
     <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow mt-6 overflow-x-auto">
+      <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+        Inactive or Abandoned Accounts in Paid Apps
+      </h2>
       <table className="w-full min-w-[600px]">
         <thead>
           <tr className="border-b border-gray-200">
             <th className="pb-4 text-left font-semibold text-gray-900 w-2/5">
-              Application
+              Name of App
             </th>
             <th className="pb-4 text-left font-semibold text-gray-900 w-2/5">
-              Progress
+              Breakdown
             </th>
             <th className="pb-4 text-center font-semibold text-gray-900 w-1/5">
               Inactive/Abandoned vs All

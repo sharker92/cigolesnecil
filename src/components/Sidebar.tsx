@@ -9,10 +9,11 @@ import { IoMdPeople } from "react-icons/io";
 import { MdAutorenew, MdUpload } from "react-icons/md";
 import { PiFlowArrow } from "react-icons/pi";
 import ThemeToggle from "./ThemeToggle";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 
 export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
   const pathname = usePathname();
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
@@ -82,15 +83,18 @@ export default function Sidebar() {
   return (
     <>
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsMobileOpen(!isMobileOpen)}
         className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white dark:bg-gray-800 shadow-lg"
       >
-        <FiMenu className="text-xl" />
+        {isMobileOpen ? (
+          <FiX className="text-xl" />
+        ) : (
+          <FiMenu className="text-xl" />
+        )}
       </button>
-
       <nav
         className={`w-64 fixed h-screen bg-white dark:bg-gray-900 shadow-lg flex flex-col transition-transform duration-300 transform
-        ${isOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 z-40`}
+        ${isMobileOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 z-40`}
       >
         <div className="py-6 px-4">
           <div className="h-10 w-full flex items-center justify-center">
@@ -183,6 +187,12 @@ export default function Sidebar() {
           </div>
         </div>
       </nav>
+      {isMobileOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-30"
+          onClick={() => setIsMobileOpen(false)}
+        />
+      )}
     </>
   );
 }
