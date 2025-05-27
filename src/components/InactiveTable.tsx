@@ -12,7 +12,7 @@ export default function InactiveTable() {
   const [hoveredApp, setHoveredApp] = useState<string | null>(null);
 
   const accounts = [
-    { app: "NUDGE SECURITY", total: 33, inactive: 2, abandoned: 5 },
+    { app: "NUDGE SECURITY", total: 43, inactive: 2, abandoned: 5 },
     { app: "ASANA", total: 9, inactive: 1, abandoned: 2 },
     { app: "ATLASSIAN", total: 8, inactive: 4, abandoned: 3 },
     { app: "GITHUB", total: 4, inactive: 1, abandoned: 1 },
