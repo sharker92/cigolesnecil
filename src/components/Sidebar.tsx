@@ -1,21 +1,86 @@
-"use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { FaHome, FaFileInvoiceDollar, FaScroll, FaCog } from "react-icons/fa";
-import { LiaFileInvoiceSolid } from "react-icons/lia";
-import { FaBrain } from "react-icons/fa6";
-import { IoMdPeople } from "react-icons/io";
-import { MdAutorenew, MdUpload } from "react-icons/md";
-import { PiFlowArrow } from "react-icons/pi";
-import ThemeToggle from "./ThemeToggle";
-import { FiMenu, FiX } from "react-icons/fi";
+'use client';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState, useEffect, useMemo, ReactNode } from 'react';
+import { FaHome, FaFileInvoiceDollar, FaScroll, FaCog } from 'react-icons/fa';
+import { LiaFileInvoiceSolid } from 'react-icons/lia';
+import { FaBrain } from 'react-icons/fa6';
+import { IoMdPeople } from 'react-icons/io';
+import { MdAutorenew, MdUpload } from 'react-icons/md';
+import { PiFlowArrow } from 'react-icons/pi';
+import ThemeToggle from './ThemeToggle';
+import { FiMenu, FiX } from 'react-icons/fi';
+
+interface NavLink {
+  id: string;
+  text: string;
+  path: string;
+  icon: ReactNode;
+  subLinks?: NavLink[];
+}
 
 export default function Sidebar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   const pathname = usePathname();
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+
+  const links: NavLink[] = useMemo(
+    () => [
+      { id: 'insights', text: 'Insights', path: '/insights', icon: <FaHome /> },
+      {
+        id: 'vendors',
+        text: 'Vendors',
+        path: '/vendors',
+        icon: <LiaFileInvoiceSolid />,
+        subLinks: [
+          {
+            id: 'applications',
+            text: 'Applications',
+            path: '/applications',
+            icon: <FaScroll />,
+          },
+          {
+            id: 'contracts',
+            text: 'Contracts',
+            path: '/contracts',
+            icon: <FaScroll />,
+          },
+          {
+            id: 'invoices',
+            text: 'Invoices',
+            path: '/invoices',
+            icon: <FaFileInvoiceDollar />,
+          },
+          {
+            id: 'priceinteligence',
+            text: 'Price Inteligence',
+            path: '/price-intelligence',
+            icon: <FaBrain />,
+          },
+        ],
+      },
+      {
+        id: 'employees',
+        text: 'Employees',
+        path: '/employees',
+        icon: <IoMdPeople />,
+      },
+      {
+        id: 'renewals',
+        text: 'Renewals',
+        path: '/renewals',
+        icon: <MdAutorenew />,
+      },
+      {
+        id: 'workflows',
+        text: 'Workflows',
+        path: '/workflows',
+        icon: <PiFlowArrow />,
+      },
+    ],
+    [],
+  );
 
   useEffect(() => {
     const parentLink = links.find((link) =>
@@ -24,61 +89,7 @@ export default function Sidebar() {
     if (parentLink) {
       setOpenSubmenu(parentLink.id);
     }
-  }, [pathname]);
-
-  const links = [
-    { id: "insights", text: "Insights", path: "/insights", icon: <FaHome /> },
-    {
-      id: "vendors",
-      text: "Vendors",
-      path: "/vendors",
-      icon: <LiaFileInvoiceSolid />,
-      subLinks: [
-        {
-          id: "applications",
-          text: "Applications",
-          path: "/applications",
-          icon: <FaScroll />,
-        },
-        {
-          id: "contracts",
-          text: "Contracts",
-          path: "/contracts",
-          icon: <FaScroll />,
-        },
-        {
-          id: "invoices",
-          text: "Invoices",
-          path: "/invoices",
-          icon: <FaFileInvoiceDollar />,
-        },
-        {
-          id: "priceinteligence",
-          text: "Price Inteligence",
-          path: "/price-intelligence",
-          icon: <FaBrain />,
-        },
-      ],
-    },
-    {
-      id: "employees",
-      text: "Employees",
-      path: "/employees",
-      icon: <IoMdPeople />,
-    },
-    {
-      id: "renewals",
-      text: "Renewals",
-      path: "/renewals",
-      icon: <MdAutorenew />,
-    },
-    {
-      id: "workflows",
-      text: "Workflows",
-      path: "/workflows",
-      icon: <PiFlowArrow />,
-    },
-  ];
+  }, [pathname, links]);
 
   return (
     <>
@@ -94,7 +105,7 @@ export default function Sidebar() {
       </button>
       <nav
         className={`w-64 fixed h-screen bg-white dark:bg-gray-900 shadow-lg flex flex-col transition-transform duration-300 transform
-        ${isMobileOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 z-40`}
+        ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 z-40`}
       >
         <div className="py-6 px-4">
           <div className="h-10 w-full flex items-center justify-center">
@@ -120,19 +131,19 @@ export default function Sidebar() {
         <div className="flex-1 overflow-y-auto">
           {links.map((link) => (
             <div key={link.id}>
-              {"subLinks" in link ? (
+              {'subLinks' in link ? (
                 <>
                   <button
                     onClick={() =>
                       setOpenSubmenu(openSubmenu === link.id ? null : link.id)
                     }
                     className={
-                      "flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                      'flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors'
                     }
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-xs mr-2">
-                        {openSubmenu === link.id ? "▼" : "▶"}
+                        {openSubmenu === link.id ? '▼' : '▶'}
                       </span>
                       {link.icon}
                       {link.text}
@@ -147,8 +158,8 @@ export default function Sidebar() {
                           href={subLink.path}
                           className={`flex items-center gap-3 p-3 text-sm transition-colors ${
                             pathname === subLink.path
-                              ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
-                              : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                              ? 'bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300'
+                              : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                           }`}
                         >
                           {subLink.icon}
@@ -163,8 +174,8 @@ export default function Sidebar() {
                   href={link.path}
                   className={`flex items-center gap-3 p-4 transition-colors ${
                     pathname === link.path
-                      ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                      ? 'bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300'
+                      : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
                 >
                   {link.icon}
