@@ -1,5 +1,5 @@
-"use client";
-import { useState } from "react";
+'use client';
+import { useState } from 'react';
 import {
   LineChart,
   Line,
@@ -10,28 +10,28 @@ import {
   ResponsiveContainer,
   Legend,
   Area,
-} from "recharts";
+} from 'recharts';
 
 const mockChartData = [
-  { month: "Jan", linked: 1, unlinked: 4 },
-  { month: "Feb", linked: 4, unlinked: 3 },
-  { month: "Mar", linked: 3, unlinked: 10 },
-  { month: "Apr", linked: 7, unlinked: 3 },
-  { month: "May", linked: 3, unlinked: 10 },
-  { month: "Jun", linked: 5, unlinked: 4 },
-  { month: "Jul", linked: 12, unlinked: 6 },
+  { month: 'Jan', linked: 1, unlinked: 4 },
+  { month: 'Feb', linked: 4, unlinked: 3 },
+  { month: 'Mar', linked: 3, unlinked: 10 },
+  { month: 'Apr', linked: 7, unlinked: 3 },
+  { month: 'May', linked: 3, unlinked: 10 },
+  { month: 'Jun', linked: 5, unlinked: 4 },
+  { month: 'Jul', linked: 12, unlinked: 6 },
 ];
 
 const timeframeLabels = {
-  "3M": { label: "3 months", months: 3 },
-  "6M": { label: "6 months", months: 6 },
-  "1Y": { label: "1 year", months: 12 },
+  '3M': { label: '3 months', months: 3 },
+  '6M': { label: '6 months', months: 6 },
+  '1Y': { label: '1 year', months: 12 },
 };
 
 export default function AdoptionChart() {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState<
-    "3M" | "6M" | "1Y"
-  >("1Y");
+    '3M' | '6M' | '1Y'
+  >('1Y');
   const currentData = mockChartData.slice(
     -timeframeLabels[selectedTimeFrame].months,
   );
@@ -52,18 +52,18 @@ export default function AdoptionChart() {
     ((currentTotal - previousTotal) / previousTotal) * 100;
 
   return (
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+    <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
       <div className="flex flex-col gap-4 md:flex-row md:justify-between items-start md:items-center mb-4">
         <h3 className="text-lg font-semibold">App Adoption Overview</h3>
         <div className="flex gap-2 w-full md:w-auto">
-          {(["3M", "6M", "1Y"] as const).map((timeframe) => (
+          {(['3M', '6M', '1Y'] as const).map((timeframe) => (
             <button
               key={timeframe}
               onClick={() => setSelectedTimeFrame(timeframe)}
-                            className={`flex-1 md:flex-none px-3 py-1 rounded-lg text-sm ${
+              className={`flex-1 md:flex-none px-3 py-1 rounded-lg text-sm ${
                 selectedTimeFrame === timeframe
-                  ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
-                  : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                  ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
               }`}
             >
               {timeframe}
@@ -82,20 +82,20 @@ export default function AdoptionChart() {
             <XAxis
               dataKey="month"
               axisLine={false}
-              tick={{ fill: "#6B7280" }}
+              tick={{ fill: '#6B7280' }}
             />
             <YAxis
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#6B7280" }}
+              tick={{ fill: '#6B7280' }}
               domain={[0, 'auto']}
             />
             <Tooltip
               contentStyle={{
-                background: "#fff",
-                border: "none",
-                borderRadius: "8px",
-                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                background: '#fff',
+                border: 'none',
+                borderRadius: '8px',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
               }}
             />
             <Legend
@@ -103,7 +103,7 @@ export default function AdoptionChart() {
               align="right"
               iconType="circle"
               iconSize={10}
-              wrapperStyle={{ paddingBottom: "20px" }}
+              wrapperStyle={{ paddingBottom: '20px' }}
             />
             <Area
               type="linear"
@@ -121,8 +121,8 @@ export default function AdoptionChart() {
               stroke="#3B82F6"
               strokeWidth={2}
               dot={{
-                fill: "white",
-                stroke: "#3B82F6",
+                fill: 'white',
+                stroke: '#3B82F6',
                 strokeWidth: 2,
                 r: 5,
               }}
@@ -147,11 +147,11 @@ export default function AdoptionChart() {
         </p>
         <div
           className={`flex items-center gap-1 ${
-            percentageChange >= 0 ? "text-green-600" : "text-red-600"
+            percentageChange >= 0 ? 'text-green-600' : 'text-red-600'
           }`}
         >
           <span className="text-sm font-medium">
-            {percentageChange >= 0 ? "+" : ""}
+            {percentageChange >= 0 ? '+' : ''}
             {percentageChange.toFixed(1)}%
           </span>
           {percentageChange >= 0 ? (

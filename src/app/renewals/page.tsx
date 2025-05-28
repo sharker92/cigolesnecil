@@ -6,7 +6,6 @@ export default function RenewalsPage() {
       <Sidebar />
       <main className="ml-64 p-4">
         <h1 className="text-2xl font-bold text-gray-800">Renewals Page</h1>
-        {/* Add vendor-related content here later */}
       </main>
     </div>
   )
